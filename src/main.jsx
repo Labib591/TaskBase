@@ -10,6 +10,7 @@ import MainLayout from './Layout/MainLayout.jsx';
 import Home from './Components/Home.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
 import RegisterPage from './Pages/RegisterPage.jsx';
+import AddTask from './Pages/AddTask.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         Component: RegisterPage
+      },
+      {
+        path: "/addtask",
+        Component:AddTask
       }
     ]
   },

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { use } from "react";
 import  Logo  from "../assets/TaskBase.png";
 import { Link, NavLink } from "react-router";
 import Home from "./Home";
+import { AuthContext } from "../Context/AuthContext";
 
 const Header = () => {
+
+  // const {user} = use(AuthContext);
+  // console.log(user);
+
   const Links = (
     <>
       <li>
