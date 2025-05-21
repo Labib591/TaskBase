@@ -1,15 +1,50 @@
-import React from "react";
+import React, { use } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router";
+import { getAuth,GoogleAuthProvider } from "firebase/auth";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
-const Login = () => {
+const LoginPage = () => {
 
-  const handleLogin = e => {
+  const navigate = useNavigate();
+
+  const { loginUser, loginUserIwthGoogle } = use(AuthContext);
+
+  const googleProvider = new GoogleAuthProvider();
+
+  const loginwithGoogle = () => {
+    loginUserIwthGoogle(googleProvider).then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      setTimeout(() => {navigate('/')}, 1000);
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    })
+  }
+
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    const formData = e.target;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
 
-  }
+    loginUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setTimeout(() => {
+          navigate("/");
+        })
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <div>
@@ -22,21 +57,34 @@ const Login = () => {
             <div className="card-body">
               <form onSubmit={handleLogin} className="form">
                 <label className="label">Email</label>
-                <input type="email" className="input" placeholder="Email" />
+                <input type="email" name="email" className="input" placeholder="Email" />
                 <label className="label">Password</label>
                 <input
                   type="password"
+                  name="password"
                   className="input"
                   placeholder="Password"
                 />
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
-                <button type="submit" className="btn bg-[#14A800] text-white hover:bg-[#108600] mt-4">Login</button>
+                <button
+                  type="submit"
+                  className="btn w-full bg-[#14A800] text-white hover:bg-[#108600] mt-4"
+                >
+                  Login
+                </button>
               </form>
-              <p>Don't have an account?<Link to="/register" className="link link-hover text-[#14A800]">Register</Link></p>
+              <p>
+                Don't have an account?
+                <Link to="/register" className="link link-hover text-[#14A800]">
+                  Register
+                </Link>
+              </p>
               <div className="divider">OR</div>
-              <button className="btn bg-[#14A800] text-white hover:bg-[#108600]"><FaGoogle></FaGoogle>Sign in with Google</button>
+              <button onClick={loginwithGoogle} className="btn bg-[#14A800] text-white hover:bg-[#108600]">
+                <FaGoogle></FaGoogle>Sign in with Google
+              </button>
             </div>
           </div>
         </div>
@@ -45,4 +93,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

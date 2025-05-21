@@ -1,27 +1,38 @@
 import React, { use } from "react";
-import  Logo  from "../assets/TaskBase.png";
+import Logo from "../assets/TaskBase.png";
 import { Link, NavLink } from "react-router";
 import Home from "./Home";
 import { AuthContext } from "../Context/AuthContext";
 
 const Header = () => {
+  const { user, logOutUser} = use(AuthContext);
+  console.log(user);
 
-  // const {user} = use(AuthContext);
-  // console.log(user);
+  const handleLogOut = () => {
+    logOutUser();
+  };
 
   const Links = (
     <>
       <li>
-        <NavLink className="hover:text-[#14A800]" to={"/"}>Home</NavLink>
+        <NavLink className="hover:text-[#14A800]" to={"/"}>
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-[#14A800]" to={"/addtask"}>Add Task</NavLink>
+        <NavLink className="hover:text-[#14A800]" to={"/addtask"}>
+          Add Task
+        </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-[#14A800]" to={"/tasks"}>Browse Task</NavLink>
+        <NavLink className="hover:text-[#14A800]" to={"/tasks"}>
+          Browse Task
+        </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-[#14A800]" to={"/mytasks"}>My Tasks</NavLink>
+        <NavLink className="hover:text-[#14A800]" to={"/mytasks"}>
+          My Tasks
+        </NavLink>
       </li>
     </>
   );
@@ -55,13 +66,31 @@ const Header = () => {
               {Links}
             </ul>
           </div>
-          <Link to={"/"}><img src={Logo} alt="logo" /></Link>
+          <Link to={"/"}>
+            <img src={Logo} alt="logo" />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{Links}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/login"><button className="btn btn-outline border-[#14A800] text-[#14A800] hover:bg-[#14A800] hover:text-white">Login</button></Link>
+            {user ? (
+              <div className="flex gap-3">
+                <div className="w-10 rounded-2xl">
+                  <img src={user?.photoURL} alt="User" />
+                </div>
+                <button
+                  className="btn bg-[#14A800] text-white"
+                  onClick={() => handleLogOut()}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link to="/login">
+                <button className="btn border-[#14A800] text-[#14A800]">Login</button>
+              </Link>
+            )}
         </div>
       </div>
     </div>

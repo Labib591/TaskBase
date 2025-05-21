@@ -11,7 +11,7 @@ const AddTask = () => {
     const taskData = Object.fromEntries(formData.entries());
     console.log(taskData);
 
-    fetch("http://localhost:3000/tasks", {
+    fetch("https://task-base-server.vercel.app/tasks", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -45,8 +45,6 @@ const AddTask = () => {
               type="text"
               name="title"
               required
-              
-              
               className="w-full border rounded-xl px-4 py-2 text-sm sm:text-base"
             />
           </div>
@@ -54,9 +52,7 @@ const AddTask = () => {
             <label className="block font-semibold mb-1">Category</label>
             <select
               name="category"
-              required
-              
-              
+              required 
               className="w-full border rounded-xl px-4 py-2 text-sm sm:text-base"
             >
               <option value="">Select a category</option>
@@ -70,7 +66,6 @@ const AddTask = () => {
             <textarea
               name="description"
               required
-              
               rows={4}
               className="w-full border rounded-xl px-4 py-2 text-sm sm:text-base"
             ></textarea>
@@ -82,7 +77,6 @@ const AddTask = () => {
                 type="date"
                 name="deadline"
                 required
-               
                 className="w-full border rounded-xl px-4 py-2 text-sm sm:text-base"
               />
             </div>
@@ -92,7 +86,6 @@ const AddTask = () => {
                 type="number"
                 name="budget"
                 required
-                
                 className="w-full border rounded-xl px-4 py-2 text-sm sm:text-base"
               />
             </div>
