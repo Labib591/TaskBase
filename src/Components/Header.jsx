@@ -1,7 +1,7 @@
 import React, { use } from "react";
 import Logo from "../assets/TaskBase.png";
 import { Link, NavLink } from "react-router";
-import Home from "./Home";
+import Home from "../Pages/Home";
 import { AuthContext } from "../Context/AuthContext";
 
 const Header = () => {

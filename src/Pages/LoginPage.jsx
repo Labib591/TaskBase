@@ -1,12 +1,13 @@
 import React, { use } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { getAuth,GoogleAuthProvider } from "firebase/auth";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
 const LoginPage = () => {
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { loginUser, loginUserIwthGoogle } = use(AuthContext);
 
@@ -17,7 +18,7 @@ const LoginPage = () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
-      setTimeout(() => {navigate('/')}, 1000);
+      setTimeout(() => {navigate(location.state?.from?.pathname || "/")}, 1000);
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -37,7 +38,7 @@ const LoginPage = () => {
         const user = result.user;
         console.log(user);
         setTimeout(() => {
-          navigate("/");
+          navigate(location.state?.from?.pathname || "/");
         })
       })
       .catch((error) => {

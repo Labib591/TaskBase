@@ -7,11 +7,13 @@ import {
   RouterProvider,
 } from "react-router";
 import MainLayout from './Layout/MainLayout.jsx';
-import Home from './Components/Home.jsx';
+import Home from './Pages/Home.jsx';
 import LoginPage from './Pages/LoginPage.jsx';
 import RegisterPage from './Pages/RegisterPage.jsx';
 import AddTask from './Pages/AddTask.jsx';
 import AuthProvider from './Context/AuthProvider.jsx';
+import PrivateRoute from './Context/PrivateRoute.jsx';
+import { ToastContainer } from 'react-toastify'
 
 const router = createBrowserRouter([
   {
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/addtask",
-        Component:AddTask
+        element: <PrivateRoute><AddTask /></PrivateRoute>
       }
     ]
   },
@@ -41,5 +43,6 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider><RouterProvider router={router} /></AuthProvider>
+    <ToastContainer></ToastContainer>
   </StrictMode>,
 )
