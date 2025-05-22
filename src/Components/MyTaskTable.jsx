@@ -1,10 +1,13 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDropright } from "react-icons/io";
+import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const MyTaskTable = ({ task }) => {
-  console.log(task);
+  // console.log(task);
+
+  const navigate = useNavigate();
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -62,7 +65,7 @@ const MyTaskTable = ({ task }) => {
                 <td>{task.deadline}</td>
                 <td className="font-bold">${task.budget}</td>
                 <td>
-                  <button className="btn bg-[#14A800] text-white flex items-center">
+                  <button onClick={() => navigate(`/task/${task._id}`)} className="btn bg-[#14A800] text-white flex items-center">
                     Update<IoIosArrowDropright size={16}></IoIosArrowDropright>
                   </button>
                   <button
