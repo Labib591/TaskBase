@@ -1,11 +1,11 @@
 import React, { use } from "react";
 import Logo from "../assets/TaskBase.png";
 import { Link, NavLink } from "react-router";
-import Home from "../Pages/Home";
 import { AuthContext } from "../Context/AuthContext";
-
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip'
 const Header = () => {
-  const { user, logOutUser} = use(AuthContext);
+  const { user, logOutUser } = use(AuthContext);
   // console.log(user);
 
   const handleLogOut = () => {
@@ -74,23 +74,33 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{Links}</ul>
         </div>
         <div className="navbar-end">
-            {user ? (
-              <div className="flex gap-3">
-                <div className="w-10 rounded-2xl">
-                  <img src={user?.photoURL} alt="User" />
-                </div>
-                <button
-                  className="btn bg-[#14A800] text-white"
-                  onClick={() => handleLogOut()}
-                >
-                  Logout
-                </button>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <div 
+              data-tooltip-id="user"
+              data-tooltip-content={user?.displayName}
+              data-tooltip-place="top">
+                <img
+                  src={user?.photoURL}
+                  alt={user?.displayName}
+                  className="w-10 h-10 rounded-full object-cover cursor-pointer"
+                />
               </div>
-            ) : (
-              <Link to="/login">
-                <button className="btn border-[#14A800] text-[#14A800]">Login</button>
-              </Link>
-            )}
+              <Tooltip id="user" />
+              <button
+                className="btn bg-[#14A800] text-white"
+                onClick={handleLogOut}
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="btn border-[#14A800] text-[#14A800]">
+                Login
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

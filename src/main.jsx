@@ -54,12 +54,12 @@ const router = createBrowserRouter([
       {
         path: "/task/:id",
         loader: ({ params }) => fetch(`https://task-base-server.vercel.app/tasks/${params.id}`),
-        Component: UpdateTask
+        element: <PrivateRoute><UpdateTask></UpdateTask></PrivateRoute>
       },
       {
-        path: "/task/:id",
+        path: "/tasks/task/:id",
         loader: ({ params }) => fetch(`https://task-base-server.vercel.app/tasks/${params.id}`),
-        Component:TaskDetailPage
+        element:<PrivateRoute><TaskDetailPage></TaskDetailPage></PrivateRoute>
       }
     ]
   },

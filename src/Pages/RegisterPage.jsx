@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import {
   getAuth,
@@ -10,7 +10,34 @@ import {
 
 const RegisterPage = () => {
 
-  const {createUser} = use(AuthContext);
+  const {createUser,loginUserIwthGoogle} = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const googleProvider = new GoogleAuthProvider();
+
+    const loginUserWithgoogle = () => {
+      loginUserIwthGoogle(googleProvider).then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        setTimeout(() => {navigate('/')}, 1000);
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+    }
+
 
   const handleRegister = e => {
     e.preventDefault();
@@ -46,9 +73,11 @@ const RegisterPage = () => {
       const user = result.user;
       updateProfile(user, {
         displayName: name,
-        photoURL: image,
-      });
+        photoURL: image,});
       // console.log(user);
+       setTimeout(() => {
+          navigate(location.state?.from?.pathname || "/");
+        }, 1000);
     });
   }
 
