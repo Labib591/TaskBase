@@ -1,10 +1,13 @@
-import React from "react";
+import React, { use } from "react";
 import { FaArrowDown } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Context/AuthContext";
 
 const AddTask = () => {
 
+  const {user} = use(AuthContext);
 
-    const handleAddTask = e => {
+  const handleAddTask = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -20,20 +23,21 @@ const AddTask = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your task has been added successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        form.reset();
       });
-    }
+  };
 
-      const categories = [
-    "Web Development",
-    "Design",
-    "Writing",
-    "Marketing",
-  ];
-
+  const categories = ["Web Development", "Design", "Writing", "Marketing"];
 
   return (
-     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 md:px-8">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 md:px-8">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-md p-6 sm:p-8 md:p-10">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 text-center">
           Add New Task
@@ -52,12 +56,14 @@ const AddTask = () => {
             <label className="block font-semibold mb-1">Category</label>
             <select
               name="category"
-              required 
+              required
               className="w-full border rounded-xl px-4 py-2 text-sm sm:text-base"
             >
               <option value="">Select a category</option>
               {categories.map((cat) => (
-                <option key={cat} value={cat}>{cat}</option>
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
               ))}
             </select>
           </div>
@@ -95,7 +101,7 @@ const AddTask = () => {
             <input
               type="email"
               name="email"
-              value="mahi"
+              value={user?.email}
               readOnly
               className="w-full border rounded-xl px-4 py-2 bg-gray-100 text-sm sm:text-base"
             />
@@ -105,7 +111,7 @@ const AddTask = () => {
             <input
               type="text"
               name="username"
-             value="labib"
+              value={user?.displayName}
               readOnly
               className="w-full border rounded-xl px-4 py-2 bg-gray-100 text-sm sm:text-base"
             />
@@ -119,7 +125,6 @@ const AddTask = () => {
         </form>
       </div>
     </div>
-
   );
 };
 

@@ -22,6 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: () => fetch('https://task-base-server.vercel.app/tasks?limit=6'),
         Component: Home,
       },
       {
