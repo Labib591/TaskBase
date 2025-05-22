@@ -15,6 +15,7 @@ import AuthProvider from './Context/AuthProvider.jsx';
 import PrivateRoute from './Context/PrivateRoute.jsx';
 import { ToastContainer } from 'react-toastify'
 import BrowseTask from './Pages/BrowseTask.jsx';
+import MyTasks from './Pages/MyTasks.jsx';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         path: "/tasks",
         loader: () => fetch('https://task-base-server.vercel.app/tasks'),
         Component: BrowseTask
+      },
+      {
+        path: "/mytasks",
+        element: <PrivateRoute><MyTasks></MyTasks></PrivateRoute>
       }
     ]
   },
