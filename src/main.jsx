@@ -46,6 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/mytasks",
+        loader: () => fetch('https://task-base-server.vercel.app/tasks'),
         element: <PrivateRoute><MyTasks></MyTasks></PrivateRoute>
       }
     ]
