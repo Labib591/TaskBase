@@ -1,9 +1,35 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { IoIosArrowDropright } from "react-icons/io";
+import Swal from "sweetalert2";
 
 const MyTaskTable = ({ task }) => {
   console.log(task);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://task-base-server.vercel.app/tasks/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
 
   return (
     <>
@@ -39,32 +65,15 @@ const MyTaskTable = ({ task }) => {
                   <button className="btn bg-[#14A800] text-white flex items-center">
                     Update<IoIosArrowDropright size={16}></IoIosArrowDropright>
                   </button>
-                  <button className="btn bg-red-500 text-white flex items-center">
+                  <button
+                    onClick={() => handleDelete(task._id)}
+                    className="btn bg-red-500 text-white flex items-center"
+                  >
                     Delete<FaTrash size={16}></FaTrash>
                   </button>
                 </td>
               </tr>
             ))}
-            {/* <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      {/* row 2 */}
-            {/* <tr>
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
-      </tr> */}
-            {/* row 3 */}
-            {/* <tr>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr> */}
           </tbody>
         </table>
       </div>
