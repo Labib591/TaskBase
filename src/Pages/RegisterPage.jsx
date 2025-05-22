@@ -48,7 +48,7 @@ const RegisterPage = () => {
         displayName: name,
         photoURL: image,
       });
-      console.log(user);
+      // console.log(user);
     });
   }
 

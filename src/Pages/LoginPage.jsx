@@ -36,7 +36,7 @@ const LoginPage = () => {
     loginUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         setTimeout(() => {
           navigate(location.state?.from?.pathname || "/");
         })

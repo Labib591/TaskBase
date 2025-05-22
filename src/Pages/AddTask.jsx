@@ -12,7 +12,7 @@ const AddTask = () => {
     const form = e.target;
     const formData = new FormData(form);
     const taskData = Object.fromEntries(formData.entries());
-    console.log(taskData);
+    // console.log(taskData);
 
     fetch("https://task-base-server.vercel.app/tasks", {
       method: "POST",

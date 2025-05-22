@@ -4,7 +4,7 @@ import TaskCard from "./TaskCard";
 
 const FeaturedTask = () => {
   const data = useLoaderData();
-  console.log(data);
+  // console.log(data);
 
   const navigate = useNavigate();
 

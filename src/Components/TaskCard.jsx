@@ -3,7 +3,7 @@ import { FaClock } from "react-icons/fa";
 import { IoIosArrowDropright } from "react-icons/io";
 
 const TaskCard = ({ task }) => {
-  console.log("task", task);
+  // console.log("task", task);
   return (
     <div className="card border-2 border-[#14A800] bg-[#DBF6D7] w-96 shadow-sm">
       <div className="card-body flex flex-col items-baseline">
