@@ -10,7 +10,7 @@ const FeaturedTask = () => {
 
   return (
     <div className="flex flex-col justify-center mx-auto items-center my-5">
-      <h1 className="text-center text-6xl font-bold text-[#14A800]">Featured Tasks</h1>
+      <h1 className="text-center lg:text-6xl md:text-4xl text-2xl font-bold text-[#14A800]">Featured Tasks</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-5">
         {data.map((task) => (
