@@ -4,14 +4,15 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Context/AuthContext";
 
 const AddTask = () => {
-
-  const {user} = use(AuthContext);
+  const { user } = use(AuthContext);
 
   const handleAddTask = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const taskData = Object.fromEntries(formData.entries());
+
+    taskData.bids = parseInt(taskData.bids, 10);
     // console.log(taskData);
 
     fetch("https://task-base-server.vercel.app/tasks", {
@@ -112,6 +113,16 @@ const AddTask = () => {
               type="text"
               name="username"
               value={user?.displayName}
+              readOnly
+              className="w-full border rounded-xl px-4 py-2 bg-gray-100 text-sm sm:text-base"
+            />
+          </div>
+          <div>
+            <label className="block font-semibold mb-1">Bids</label>
+            <input
+              type="number"
+              name="bids"
+              value={parseInt(0)}
               readOnly
               className="w-full border rounded-xl px-4 py-2 bg-gray-100 text-sm sm:text-base"
             />
