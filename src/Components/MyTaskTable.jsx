@@ -4,7 +4,7 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
-const MyTaskTable = ({ task }) => {
+const MyTaskTable = ({ task, tasks, setTasks }) => {
   // console.log(task);
 
   const navigate = useNavigate();
@@ -26,8 +26,11 @@ const MyTaskTable = ({ task }) => {
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);
-            if (data.deletedCount > 0) {
+            if (data.deletedCount) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
+
+              const remaining = tasks.filter((task) => task._id !== id);
+              setTasks(remaining);
             }
           });
       }
@@ -53,7 +56,7 @@ const MyTaskTable = ({ task }) => {
           <tbody>
             {/* row 1 */}
             {task.map((task) => (
-              <tr key={task._id} className="hover:bg-[#DBF6D7]">
+              <tr key={task._id}>
                 <th>{}</th>
                 <td className="font-bold">{task.title}</td>
                 <td>

@@ -18,6 +18,7 @@ import BrowseTask from './Pages/BrowseTask.jsx';
 import MyTasks from './Pages/MyTasks.jsx';
 import UpdateTask from './Pages/UpdateTask.jsx';
 import TaskDetailPage from './Pages/TaskDetailPage.jsx';
+import ThemeProvider from './Components/ThemeContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -67,7 +68,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider><RouterProvider router={router} /></AuthProvider>
+    <ThemeProvider><AuthProvider><RouterProvider router={router} /></AuthProvider></ThemeProvider>
     <ToastContainer></ToastContainer>
   </StrictMode>,
 )

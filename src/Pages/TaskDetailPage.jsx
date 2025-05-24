@@ -51,7 +51,7 @@ const TaskDetailPage = () => {
         You bid for {bid} {bid === 1 ? "opportunity" : "opportunities"}
       </div>
       <div className="w-11/12 bg-base-100 shadow-xl my-5 mx-auto text-[#021100]">
-        <div className="flex justify-between p-5 border-[#14A800] border-2 rounded-2xl">
+        <div className="flex justify-between p-5 bg-[#DBF6D7] border-[#14A800] border-2 rounded-2xl">
           <div className="flex flex-col gap-4">
             <h2 className="card-title text-3xl">{title}</h2>
             <p>{description}</p>
@@ -75,7 +75,7 @@ const TaskDetailPage = () => {
             </p>
             <button
               onClick={handleBid}
-              className="flex items-center gap-2 btn border-[#14A800] text-[#14A800] bg-transparent hover:bg-[#108600] hover:text-white"
+              className="flex items-center gap-2 btn border-[#14A800] bg-[#14A800] text-[#212121] hover:bg-[#108600] hover:text-white"
             >
               Bid<IoIosHeart></IoIosHeart>
             </button>
