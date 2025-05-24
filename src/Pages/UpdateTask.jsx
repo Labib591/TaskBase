@@ -41,8 +41,8 @@ const UpdateTask = () => {
   const categories = ["Web Development", "Design", "Writing", "Marketing"];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 md:px-8">
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-md p-6 sm:p-8 md:p-10">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8">
+      <div className="w-full max-w-2xl bg-[#DBF6D7] text-[#021100] rounded-2xl shadow-md p-6 sm:p-8 md:p-10">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 text-center">
           Update Task
         </h1>
