@@ -19,11 +19,13 @@ import MyTasks from './Pages/MyTasks.jsx';
 import UpdateTask from './Pages/UpdateTask.jsx';
 import TaskDetailPage from './Pages/TaskDetailPage.jsx';
 import ThemeProvider from './Components/ThemeContext.jsx';
+import Error from './Components/Error.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,
