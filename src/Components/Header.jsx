@@ -1,5 +1,5 @@
 import React, { use, useContext } from "react";
-import Logo from "../assets/TaskBase.png";
+// import Logo from "../assets/TaskBase.png";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import "react-tooltip/dist/react-tooltip.css";
@@ -15,7 +15,7 @@ const Header = () => {
     logOutUser();
   };
 
-  const Links = (
+  const notLoggedLinks = (
     <>
       <li>
         <NavLink className="hover:text-[#14A800]" to={"/"}>
@@ -23,8 +23,18 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-[#14A800]" to={"/addtask"}>
-          Add Task
+        <NavLink className="hover:text-[#14A800]" to={"/tasks"}>
+          Browse Task
+        </NavLink>
+      </li>
+    </>
+  );
+
+  const loggedLinks = (
+    <>
+      <li>
+        <NavLink className="hover:text-[#14A800]" to={"/"}>
+          Home
         </NavLink>
       </li>
       <li>
@@ -33,15 +43,15 @@ const Header = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink className="hover:text-[#14A800]" to={"/mytasks"}>
-          My Tasks
+        <NavLink className="hover:text-[#14A800]" to={"/dashboard"}>
+          Dashboard
         </NavLink>
       </li>
     </>
   );
 
   return (
-    <div>
+    <div className="sticky top-0 z-10 font-main">
       <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
@@ -66,15 +76,17 @@ const Header = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              {Links}
+              {user ? loggedLinks : notLoggedLinks}
             </ul>
           </div>
           <Link to={"/"}>
-            <img src={Logo} alt="logo" />
+            <h1 className="text-3xl font-bold text-[#14A800]">TaskBase</h1>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{Links}</ul>
+          <ul className="menu menu-horizontal px-1">
+            {user ? loggedLinks : notLoggedLinks}
+          </ul>
         </div>
         <div className="navbar-end flex gap-3">
           <button
@@ -98,7 +110,7 @@ const Header = () => {
                   className="w-10 h-10 rounded-full object-cover cursor-pointer"
                 />
               </div>
-              <Tooltip id="user" style={{zIndex: "1000"}}/>
+              <Tooltip id="user" style={{ zIndex: "1000" }} />
               <button
                 className="btn bg-[#14A800] text-white"
                 onClick={handleLogOut}
@@ -107,11 +119,18 @@ const Header = () => {
               </button>
             </div>
           ) : (
-            <Link to="/login">
-              <button className="btn border-[#14A800] text-[#14A800]">
-                Login
-              </button>
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link to="/login">
+                <button className="btn bg-[#14A800] text-white hover:bg-transparent hover:text-[#14A800] hover:border-[#14A800]">
+                  Login
+                </button>
+              </Link>
+              <Link to="/register">
+                <button className="btn border-[#14A800] text-[#14A800] hover:bg-[#14A800] hover:text-white">
+                  Register
+                </button>
+              </Link>
+            </div>
           )}
         </div>
       </div>

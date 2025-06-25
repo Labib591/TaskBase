@@ -4,25 +4,36 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { useNavigate } from "react-router";
 
 const TaskCard = ({ task }) => {
-  
   const navigate = useNavigate();
-  // console.log("task", task);
+
   return (
-    <div className="card border-2 border-[#14A800] bg-[#DBF6D7] w-96 shadow-sm">
-      <div className="card-body flex flex-col items-baseline">
-        <h2 className="card-title text-2xl text-[#021100]">{task.title}</h2>
-        <p className="text-[#084300]">
-          {task.description.length > 100
-            ? task.description.slice(0, 100) + "..."
-            : task.description}
-        </p>
-        <p className="bg-[#99DC8F] text-[#084300] px-4 py-2 font-medium rounded-4xl">{task.category}</p>
-        <p className="text-xl font-bold text-[#084300]">${task.budget}</p>
-        <p className="flex items-center gap-2 text-[#084300]"><FaClock></FaClock>{task.deadline}</p>
-        <div className="card-actions mt-2">
-          <button onClick={() => navigate(`/tasks/task/${task._id}`)} className="btn bg-[#14A800] text-white flex items-center">See Details<IoIosArrowDropright size={16}></IoIosArrowDropright></button>
-        </div>
+    <div className="bg-[#f2fff0] border border-[#14A800] rounded-2xl p-6 w-full flex flex-col justify-between max-w-md shadow-md transition hover:shadow-lg">
+      <h2 className="text-2xl font-semibold text-[#021100] mb-2">{task.title}</h2>
+
+      <p className="text-[#084300] text-sm mb-3">
+        {task.description.length > 100
+          ? `${task.description.slice(0, 100)}...`
+          : task.description}
+      </p>
+
+      <div className="inline-block w-fit bg-[#99DC8F] text-[#084300] text-xs font-medium px-3 py-1 rounded-full mb-3">
+        {task.category}
       </div>
+
+      <div className="flex items-center justify-between text-[#084300] mb-4">
+        <span className="text-lg font-bold">${task.budget}</span>
+        <span className="flex items-center gap-2 text-sm">
+          <FaClock className="text-[#084300]" />
+          {task.deadline}
+        </span>
+      </div>
+
+      <button
+        onClick={() => navigate(`/tasks/task/${task._id}`)}
+        className="w-full bg-[#14A800] text-white flex items-center justify-center gap-2 py-2 px-4 rounded-xl text-sm font-medium transition hover:bg-[#119900]"
+      >
+        See Details <IoIosArrowDropright size={16} />
+      </button>
     </div>
   );
 };
