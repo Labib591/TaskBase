@@ -15,6 +15,7 @@ const UpdateTask = () => {
     const form = e.target;
     const formData = new FormData(form);
     const taskData = Object.fromEntries(formData.entries());
+    taskData.budget = parseInt(taskData.budget, 10);
 
     fetch(`https://task-base-server.vercel.app/tasks/${_id}`, {
       method: "PUT",

@@ -22,13 +22,22 @@ const Header = () => {
           Home
         </NavLink>
       </li>
+      
       <li>
         <NavLink className="hover:text-[#14A800]" to={"/tasks"}>
           Browse Task
         </NavLink>
       </li>
+
+      <li>
+        <NavLink className="hover:text-[#14A800]" onClick={() => scrollTo(document.getElementById("success"))}>
+          Abouts US
+        </NavLink>
+      </li>
     </>
   );
+
+  
 
   const loggedLinks = (
     <>
@@ -42,6 +51,17 @@ const Header = () => {
           Browse Task
         </NavLink>
       </li>
+
+      <li>
+        <button className="hover:text-[#14A800]" onClick={() => {
+          const success = document.getElementById('success');
+          success?.scrollIntoView( 
+            {behavior: 'smooth',}
+        )}}>
+          Abouts US
+        </button>
+      </li>
+
       <li>
         <NavLink className="hover:text-[#14A800]" to={"/dashboard"}>
           Dashboard

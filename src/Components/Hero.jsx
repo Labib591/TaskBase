@@ -25,14 +25,22 @@ const HeroSection = () => {
           Post your tasks and let skilled freelancers handle them — efficiently
           and affordably.
         </p>
-        <Link to={"/addtask"}>
+        <div className="flex gap-4 items-center justify-center">
+          <Link to={"/dashboard/addtask"}>
           <button
-            onClick={() => navigate("/add-task")}
             className="bg-[#14A800] hover:bg-[#108600] text-white font-semibold px-6 py-3 rounded-xl transition duration-300"
           >
             Add Your Task
           </button>
         </Link>
+        <Link to={"/dashboard"}>
+          <button
+            className="bg-transparent hover:bg-[#108600] hover:text-white border-2 border-[#14A800] text-[#14A800] font-semibold px-6 py-3 rounded-xl transition duration-300"
+          >
+            Go To Dashboard
+          </button>
+        </Link>
+        </div>
       </div>
     </div>
   );

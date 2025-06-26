@@ -3,7 +3,7 @@ import CountUp from 'react-countup';
 
 const Success = () => {
   return (
-    <div className="text-center my-10 flex flex-col items-center text-[#212121]">
+    <div id="success" className="text-center my-10 flex flex-col items-center text-[#212121]">
       <div className="">
         <h1 className="text-xl md:text-3xl lg:text-5xl font-extrabold text-[#14A800]">
           Hire The Best Proffessionals

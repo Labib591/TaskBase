@@ -11,6 +11,7 @@ const AddTask = () => {
     const form = e.target;
     const formData = new FormData(form);
     const taskData = Object.fromEntries(formData.entries());
+    taskData.budget = parseInt(taskData.budget, 10);
 
     taskData.bids = parseInt(taskData.bids, 10);
     // console.log(taskData);
