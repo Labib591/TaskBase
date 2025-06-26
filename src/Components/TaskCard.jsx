@@ -11,8 +11,8 @@ const TaskCard = ({ task }) => {
       <h2 className="text-2xl font-semibold text-[#021100] mb-2">{task.title}</h2>
 
       <p className="text-[#084300] text-sm mb-3">
-        {task.description.length > 100
-          ? `${task.description.slice(0, 100)}...`
+        {task.description.length > 50
+          ? `${task.description.slice(0, 50)}...`
           : task.description}
       </p>
 
@@ -30,7 +30,7 @@ const TaskCard = ({ task }) => {
 
       <button
         onClick={() => navigate(`/tasks/task/${task._id}`)}
-        className="w-full bg-[#14A800] text-white flex items-center justify-center gap-2 py-2 px-4 rounded-xl text-sm font-medium transition hover:bg-[#119900]"
+        className="w-full bg-[#14A800] text-white flex items-center justify-center gap-2 py-2 px-4 rounded-full text-sm font-medium transition hover:bg-[#119900]"
       >
         See Details <IoIosArrowDropright size={16} />
       </button>

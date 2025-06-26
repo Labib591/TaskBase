@@ -37,18 +37,9 @@ const router = createBrowserRouter([
         Component: RegisterPage
       },
       {
-        path: "/addtask",
-        element: <PrivateRoute><AddTask /></PrivateRoute>
-      },
-      {
         path: "/tasks",
         loader: () => fetch('https://task-base-server.vercel.app/tasks'),
         Component: BrowseTask
-      },
-      {
-        path: "/mytasks",
-        loader: () => fetch('https://task-base-server.vercel.app/tasks'),
-        element: <PrivateRoute><MyTasks></MyTasks></PrivateRoute>
       },
       {
         path: "/task/:id",
@@ -68,7 +59,8 @@ const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
         {
-            index: true,
+            path: "/dashboard",
+            loader: () => fetch('https://task-base-server.vercel.app/tasks'),
             Component: DashboardOverview,
         },
         {
@@ -76,12 +68,16 @@ const router = createBrowserRouter([
             element: <PrivateRoute><AddTask /></PrivateRoute>
         },
         
-            {
+        {
         path: "/dashboard/mytasks",
         loader: () => fetch('https://task-base-server.vercel.app/tasks'),
         element: <PrivateRoute><MyTasks></MyTasks></PrivateRoute>
       },
-        
+      {
+        path: "/dashboard/tasks",
+        loader: () => fetch('https://task-base-server.vercel.app/tasks'),
+        Component: BrowseTask
+      },
     ]
   }
 ]);

@@ -35,7 +35,7 @@ const UpdateTask = () => {
         form.reset();
       });
 
-      setTimeout(() => navigate("/mytasks"), 1000);
+      setTimeout(() => navigate("/dashboard/mytasks"), 1000);
   };
 
   const categories = ["Web Development", "Design", "Writing", "Marketing"];
