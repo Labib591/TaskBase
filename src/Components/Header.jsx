@@ -30,9 +30,13 @@ const Header = () => {
       </li>
 
       <li>
-        <NavLink className="hover:text-[#14A800]" onClick={() => scrollTo(document.getElementById("success"))}>
+        <button className="hover:text-[#14A800]" onClick={() => {
+          const success = document.getElementById('success');
+          success?.scrollIntoView( 
+            {behavior: 'smooth',}
+        )}}>
           Abouts US
-        </NavLink>
+        </button>
       </li>
     </>
   );
